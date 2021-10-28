@@ -9,7 +9,7 @@
 
 #define RECTANGLE           1
 #define TRIANGLE            0
-#define SQUARE              0
+#define SQUARE              1
 #define HOURGLASS           0
 
 #if RECTANGLE

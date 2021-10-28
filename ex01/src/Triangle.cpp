@@ -37,10 +37,10 @@ Triangle::Triangle(const Vertex& v0, const Vertex& v1, double height)
 }
 
 //??
-Triangle::Triangle()
-{
-	
-}
+//Triangle::Triangle()
+//{
+//	
+//}
 
 
 bool Triangle::validateCoordinates(const Vertex v0, const Vertex v1, const Vertex v2) const

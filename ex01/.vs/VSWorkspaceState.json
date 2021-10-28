@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\include",
+    "\\out",
+    "\\out\\build",
     "\\src"
   ],
-  "SelectedNode": "\\src\\Vertex.cpp",
+  "SelectedNode": "\\include\\macros.h",
   "PreviewInSolutionExplorer": false
 }

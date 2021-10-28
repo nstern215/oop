@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Vertex.h"
 #include "Rectangle.h"
 
@@ -10,7 +12,8 @@ public:
 	Vertex getBottomLeft() const;
 	Vertex getTopRight() const;
 	double getLength() const;
-
+	bool validateSize() const;
+	
 	void draw(Board& board) const;
 	Rectangle getBoundingRectangle() const;
 	double getArea() const;
@@ -21,3 +24,5 @@ public:
 private:
 	Rectangle m_rectangle;
 };
+
+const auto EPSILON = 0.5;

@@ -11,7 +11,7 @@ public:
 	//ctors
 	Triangle(const Vertex vertices[3]);
 	Triangle(const Vertex& v0, const Vertex& v1, double height);
-	Triangle();
+	Triangle() = default;
 
 	//internal
 	Vertex getVertex(int index) const;
@@ -34,11 +34,13 @@ private:
 	Vertex m_v0;
 	Vertex m_v1;
 	Vertex m_v2;
-
-	const double DEFAULT_V0_COL = 20;
-	const double DEFAULT_V0_ROW = 20;
-	const double DEFAULT_V1_COL = 20;
-	const double DEFAULT_V1_ROW = 30;
-	const double DEFAULT_V2_COL = 25;
-	const double DEFAULT_V2_ROW = 20 + sqrt(75);
 };
+
+const double DEFAULT_V0_COL = 20;
+const double DEFAULT_V0_ROW = 20;
+const double DEFAULT_V1_COL = 20;
+const double DEFAULT_V1_ROW = 30;
+const double DEFAULT_V2_COL = 25;
+const double DEFAULT_V2_ROW = 20 + sqrt(75);
+
+const auto EPSILON = 0.5;
