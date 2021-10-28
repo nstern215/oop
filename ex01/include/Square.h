@@ -25,4 +25,4 @@ private:
 	Rectangle m_rectangle;
 };
 
-const auto EPSILON = 0.5;
+//const double EPSILON = 0.5;

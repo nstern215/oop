@@ -1,14 +1,20 @@
 #include "Square.h"
 #include "Vertex.h"
 #include "Rectangle.h"
+#include "Triangle.h"
 
 Square::Square(const Vertex& bottomLeft, const Vertex& topRight)
 	:m_rectangle(bottomLeft, topRight)
 {
-	  if(!validateSize())
-		  m_rectangle.buildDefaultRectangle();
+	if (!validateSize())
+		//in this case the rectangle should be built with default parameters
+		//the Rectangle class has a private function to build a default rectangle
+		//by calling the rectangle ctor with wrong input params will cause the ctor
+		//to call this function
+		m_rectangle = Rectangle(topRight, bottomLeft);
 }
 Square::Square(const Vertex& start, double length)
+	:m_rectangle(start, start)
 {
 	Vertex topRight;
 	topRight.m_col = start.m_col + length;
@@ -41,7 +47,15 @@ Vertex Square::getCenter() const
 	return m_rectangle.getCenter();
 }
 
-//get vertexes
+Vertex Square::getBottomLeft() const
+{
+	return m_rectangle.getBottomLeft();
+}
+
+Vertex Square::getTopRight() const
+{
+	return m_rectangle.getTopRight();
+}
 
 bool Square::scale(double factor)
 {

@@ -1,13 +1,11 @@
 #include "Rectangle.h"
-#include "macros.h"
 
-//ctors
 Rectangle::Rectangle(const Vertex& bottomLeft, const Vertex& topRight) :
 	m_bottomLeft(bottomLeft),
 	m_topRight(topRight)
-	//Rectangle(bottomLeft.m_col, bottomLeft.m_row, topRight.m_col, topRight.m_row)
 {
-	if (!bottomLeft.isValid() || !topRight.isValid())
+	if (!bottomLeft.isValid() || !topRight.isValid() 
+		|| !topRight.isHigherThan(bottomLeft) || !topRight.isToTheRightOf(bottomLeft))
 		buildDefaultRectangle();
 }
 
@@ -112,7 +110,7 @@ void Rectangle::buildDefaultRectangle()
 bool Rectangle::validateCordinates() const
 {
 	if (!m_bottomLeft.isValid() || !m_topRight.isValid()
-		|| m_bottomLeft.m_row >= m_topRight.m_row)
+		|| !m_topRight.isHigherThan(m_bottomLeft) || !m_topRight.isToTheRightOf(m_bottomLeft))
 		return false;
 
 	return true;
