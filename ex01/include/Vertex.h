@@ -13,6 +13,8 @@ struct Vertex
     bool isHigherThan(const Vertex& other) const;
     bool isToTheRightOf(const Vertex& other) const;
     bool isValid() const;
+    bool isValid(const double col, const double row) const;
+    bool scaleFromVertex(const double factor, const Vertex center);
 };
 
 std::istream& operator>>(std::istream& istr, Vertex& v);

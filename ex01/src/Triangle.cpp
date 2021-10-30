@@ -2,6 +2,8 @@
 #include "Rectangle.h"
 #include "Vertex.h"
 #include <cmath>
+#include <iostream>
+
 
 Triangle::Triangle(const Vertex vertices[3])
 	:m_v0(vertices[0].m_col, vertices[0].m_row),
@@ -12,23 +14,23 @@ Triangle::Triangle(const Vertex vertices[3])
 		buildDefaultRectangle();
 }
 
-Triangle::Triangle(const Vertex& v0, const Vertex& v1, double height)
+Triangle::Triangle(const Vertex& v0, const Vertex& v1, double height):
+	m_v0(v0),
+	m_v1(v1)
 {
-	if (!checkParallelX(v0, v1))
+	if (!checkParallelX(v0, v1) || m_v0.m_col - m_v1.m_col < EPSILON)
 	{
 		buildDefaultRectangle();
 		return;
 	}
-	
-	Vertex vertices[3];
-	auto baseLength = calcDistance(v0, v1);
-	Vertex v2;
-	v2.m_col = (baseLength / 2) + v0.m_col;
-	v2.m_row = v0.m_row + height;
 
-	vertices[0] = v0;
-	vertices[1] = v1;
-	vertices[2] = v2;
+	const auto baseLength = calcDistance(v0, v1);
+	
+	m_v2.m_col = (baseLength / 2) + v0.m_col;
+	m_v2.m_row = v0.m_row + height;
+
+	if (calcDistance(m_v0, m_v2) - calcDistance(m_v1, m_v2) > EPSILON)
+		buildDefaultRectangle();
 }
 
 bool Triangle::validateCoordinates(const Vertex v0, const Vertex v1, const Vertex v2) const
@@ -36,7 +38,7 @@ bool Triangle::validateCoordinates(const Vertex v0, const Vertex v1, const Verte
 	if (!v0.isValid() || !v1.isValid() || !v2.isValid())
 		return false;
 
-	if (calcDistance(v0, v1) - calcDistance(v1, v2) > EPSILON)
+	if (calcDistance(v0, v2) - calcDistance(v1, v2) > EPSILON)
 		return false;
 
 	return checkParallelX(v0, v1);
@@ -64,7 +66,7 @@ double Triangle::getLength() const
 
 double Triangle::getHeigt() const
 {
-	return m_v1.m_row - m_v0.m_row;
+	return m_v2.m_row - m_v0.m_row;
 }
 
 void Triangle::draw(Board& board) const
@@ -76,13 +78,28 @@ void Triangle::draw(Board& board) const
 
 Rectangle Triangle::getBoundingRectangle() const
 {
+	//in case of default coordinates triangle
+	if (!checkParallelX(m_v0, m_v1))
+	{
+		Vertex topRight;
+		topRight.m_col = m_v2.m_col;
+		topRight.m_row = m_v1.m_row;
+		
+		return Rectangle(m_v0, topRight);
+	}
+	
+	const auto heigt = getHeigt();
+	
 	Vertex topRight;
-	topRight.m_row = m_v1.m_row;
-	topRight.m_col = m_v2.m_col;
+	Vertex bottomLeft;
 
-	Rectangle bounding(m_v0, topRight);
+	bottomLeft.m_col = std::min(m_v0.m_col, m_v1.m_col);
+	bottomLeft.m_row = heigt > 0 ? m_v0.m_row : m_v2.m_row;
 
-	return bounding;
+	topRight.m_col = std::max(m_v0.m_col, m_v1.m_col);
+	topRight.m_row = heigt < 0 ? m_v0.m_row : m_v2.m_row;
+
+	return Rectangle(bottomLeft, topRight);
 }
 
 double Triangle::getArea() const
@@ -107,12 +124,22 @@ Vertex Triangle::getCenter() const
 
 bool Triangle::scale(double factor)
 {
-	return true;
+	if (factor <= 0)
+		return false;
+
+	const auto center = getCenter();
+
+	if (m_v0.scaleFromVertex(factor, center) &&
+		m_v1.scaleFromVertex(factor, center) &&
+		m_v2.scaleFromVertex(factor, center))
+		return true;
+	
+	return false;
 }
 
 bool Triangle::checkParallelX(const Vertex v0, const Vertex v1) const
 {
-	return v0.m_row - v1.m_row <= EPSILON;
+	return abs(v0.m_row - v1.m_row) <= EPSILON;
 }
 
 double Triangle::calcDistance(const Vertex v0, const Vertex v1) const
@@ -122,6 +149,8 @@ double Triangle::calcDistance(const Vertex v0, const Vertex v1) const
 
 void Triangle::buildDefaultRectangle()
 {
+	std::cout << "building default triangle" << std::endl;
+	
 	m_v0.m_col = DEFAULT_V0_COL;
 	m_v0.m_row = DEFAULT_V0_ROW;
 	m_v1.m_col = DEFAULT_V1_COL;

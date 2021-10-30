@@ -75,7 +75,16 @@ Vertex Rectangle::getCenter() const
 
 bool Rectangle::scale(double factor)
 {
-	return true;
+	if (factor <= 0)
+		return false;
+
+	Vertex center = getCenter();
+
+	if (m_bottomLeft.scaleFromVertex(factor, center) &&
+		m_topRight.scaleFromVertex(factor, center))
+		return true;
+	
+	return false;
 }
 
 Vertex Rectangle::getBottomLeft() const
