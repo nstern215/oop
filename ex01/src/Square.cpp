@@ -10,8 +10,9 @@ Square::Square(const Vertex& bottomLeft, const Vertex& topRight)
 		//in this case the rectangle should be built with default parameters
 		//the Rectangle class has a private function to build a default rectangle
 		//by calling the rectangle ctor with wrong input params will cause the ctor
-		//to call this function
-		m_rectangle = Rectangle(topRight, bottomLeft);
+		//to call this function.
+		//the default rectangle is the same as the default square
+		m_rectangle = Rectangle(topRight, topRight);
 }
 Square::Square(const Vertex& start, double length)
 	:m_rectangle(start, start)

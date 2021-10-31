@@ -66,7 +66,7 @@ double Triangle::getLength() const
 
 double Triangle::getHeigt() const
 {
-	return m_v2.m_row - m_v0.m_row;
+	return abs(m_v2.m_row - m_v0.m_row);
 }
 
 void Triangle::draw(Board& board) const

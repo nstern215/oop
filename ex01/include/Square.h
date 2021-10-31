@@ -12,7 +12,6 @@ public:
 	Vertex getBottomLeft() const;
 	Vertex getTopRight() const;
 	double getLength() const;
-	bool validateSize() const;
 	
 	void draw(Board& board) const;
 	Rectangle getBoundingRectangle() const;
@@ -22,7 +21,7 @@ public:
 	bool scale(double factor);
 
 private:
+	bool validateSize() const;
+	
 	Rectangle m_rectangle;
 };
-
-//const double EPSILON = 0.5;

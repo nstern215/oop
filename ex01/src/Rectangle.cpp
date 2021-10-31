@@ -23,7 +23,7 @@ Rectangle::Rectangle(double x0, double y0, double x1, double y1) :
 }
 
 Rectangle::Rectangle(const Vertex& start, double width, double height)
-	:Rectangle(start.m_col,start.m_row, start.m_row + width, start.m_row + height)
+	:Rectangle(start.m_col,start.m_row, start.m_col + width, start.m_row + height)
 {
 }
 
