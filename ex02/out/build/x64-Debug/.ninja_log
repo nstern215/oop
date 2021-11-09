@@ -1,0 +1,25 @@
+# ninja log v5
+1	1350	6580239146300158	CMakeFiles/ex02.dir/src/main.cpp.obj	a407ccdf7a35d460
+20	1089	6580203036721255	CMakeFiles/ex02.dir/src/cube.cpp.obj	c4c218a8df8c0e9a
+18	923	6580237496894441	CMakeFiles/ex02.dir/src/gameBoard.cpp.obj	f9c1b7d5ddfad24c
+1	1599	6580235007713016	CMakeFiles/ex02.dir/src/controller.cpp.obj	3b2183e54ea10ebd
+1351	1928	6580239150812986	ex02.exe	df6377559ed280da
+110	908	6581114318009573	CMakeFiles/ex02.dir/src/Mage.cpp.obj	43aed2ec5348666e
+50	920	6581114318041285	CMakeFiles/ex02.dir/src/King.cpp.obj	268a81f46db91d62
+161	928	6581114318089192	CMakeFiles/ex02.dir/src/Warrior.cpp.obj	e3094c5dc5a6c344
+138	951	6581114318289060	CMakeFiles/ex02.dir/src/Thief.cpp.obj	ceed2f9ef80d3dd5
+76	1690	6581114325846165	CMakeFiles/ex02.dir/src/gameBoard.cpp.obj	f9c1b7d5ddfad24c
+20	2259	6581114331554058	CMakeFiles/ex02.dir/src/controller.cpp.obj	3b2183e54ea10ebd
+3	2339	6581114332352675	CMakeFiles/ex02.dir/src/main.cpp.obj	a407ccdf7a35d460
+95	1506	6581531981067516	CMakeFiles/ex02.dir/src/Mage.cpp.obj	43aed2ec5348666e
+112	1508	6581531981067516	CMakeFiles/ex02.dir/src/Thief.cpp.obj	ceed2f9ef80d3dd5
+39	1509	6581531981067516	CMakeFiles/ex02.dir/src/King.cpp.obj	268a81f46db91d62
+61	1600	6581531981955161	CMakeFiles/ex02.dir/src/gameBoard.cpp.obj	f9c1b7d5ddfad24c
+2	2071	6581531986732723	CMakeFiles/ex02.dir/src/main.cpp.obj	a407ccdf7a35d460
+21	2079	6581531986706009	CMakeFiles/ex02.dir/src/controller.cpp.obj	3b2183e54ea10ebd
+59	729	6581532341969278	CMakeFiles/ex02.dir/src/Warrior.cpp.obj	e3094c5dc5a6c344
+1	1238	6581532347138097	CMakeFiles/ex02.dir/src/main.cpp.obj	a407ccdf7a35d460
+20	1253	6581532347255141	CMakeFiles/ex02.dir/src/controller.cpp.obj	3b2183e54ea10ebd
+30	1357	6581544951433114	CMakeFiles/ex02.dir/src/controller.cpp.obj	3b2183e54ea10ebd
+1	1360	6581544951449733	CMakeFiles/ex02.dir/src/main.cpp.obj	a407ccdf7a35d460
+1360	2246	6581544958909919	ex02.exe	5709cfea6bedaf21
