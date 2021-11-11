@@ -1,18 +1,17 @@
 #include "Warrior.h"
+#include "controller.h"
 
 Warrior::Warrior():
 	m_col(3),
-	m_row(0),
-	m_isActive(false)
+	m_row(0)
 {
 	
 }
 
 
-Warrior::Warrior(int col, int row, bool active) :
+Warrior::Warrior(int col, int row):
 	m_col(col),
-	m_row(row),
-	m_isActive(active)
+	m_row(row)
 {
 }
 
@@ -26,18 +25,27 @@ int Warrior::getCol() const
 	return m_col;
 }
 
-void Warrior::changeActive()
+bool Warrior::move(cube& destination, controller& gameController)
 {
-	m_isActive = !m_isActive;
+	// if (gameController.moveToDestination(gameController.getCube(m_row, m_col), destination))
+	if (destination.getActiveElement() == 'X')
+	{
+		if (gameController.useTeleport(destination, m_row, m_col))
+			return true;
+
+		return false;
+	}
+	
+	if (destination.getActiveElement() == '!')
+		gameController.killOrk(destination);
+	
+	if (gameController.moveToDestination(m_row, m_col, destination))
+	{	
+		m_row = destination.getRow();
+		m_col = destination.getCol();
+
+		return true;
+	}
+
+	return false;
 }
-
-bool Warrior::isActive() const
-{
-	return m_isActive;
-}
-
-void Warrior::move(cube& destination, controller& gameController)
-{
-
-}
-

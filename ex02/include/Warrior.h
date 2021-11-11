@@ -6,18 +6,14 @@ class Warrior
 {
 public:
     Warrior();
-	Warrior(int col, int row, bool active);
-	void changeActive();
+	Warrior(int col, int row);
 
-	bool isActive() const;
-	void move(cube& destination, controller& gameController);
+	bool move(cube& destination, controller& gameController);
 
 	int getRow() const;
 	int getCol() const;
 
 private:
-	bool m_isActive;
-
 	int m_row;
 	int m_col;
 };

@@ -1,15 +1,14 @@
 #include "Mage.h"
+#include "controller.h"
 
 Mage::Mage():
 	m_col(2),
-	m_row(0),
-	m_isActive(false)
+	m_row(0)
 {}
 
-Mage::Mage(int col, int row, bool active) :
+Mage::Mage(int col, int row):
 	m_col(col),
-	m_row(row),
-	m_isActive(active)
+	m_row(row)
 {
 }
 
@@ -23,18 +22,20 @@ int Mage::getCol() const
 	return m_col;
 }
 
-void Mage::changeActive()
+bool Mage::move(cube& destination, controller& gameController)
 {
-	m_isActive = !m_isActive;
-}
+	// if (gameController.moveToDestination(gameController.getCube(m_row, m_col), destination))
+	if (destination.getActiveElement() == '*')
+		gameController.killFire(destination);
+	
+	if (gameController.moveToDestination(m_row, m_col, destination))
+	{
+		m_row = destination.getRow();
+		m_col = destination.getCol();
 
-bool Mage::isActive() const
-{
-	return m_isActive;
-}
+		return true;
+	}
 
-void Mage::move(cube& destination, controller& gameController)
-{
-
+	return false;
 }
 

@@ -1,8 +1,12 @@
 #include "gameBoard.h"
 
-using std::nothrow;
+gameBoard::gameBoard():
+	m_sizeCol(0),
+	m_sizeRow(0)
+{
+}
 
-//todo: set default configuration for board dimenstion
+
 gameBoard::gameBoard(int sizeCol, int sizeRow):
 	m_sizeCol(sizeCol),
 	m_sizeRow(sizeRow)
@@ -13,6 +17,24 @@ gameBoard::gameBoard(int sizeCol, int sizeRow):
 		for (int j = 0; j < m_sizeCol; j++)
 			m_board[i].emplace_back(i, j);
 	}
+}
+
+gameBoard::gameBoard(const gameBoard& other):
+	m_sizeCol(other.getSizeCol()),
+	m_sizeRow(other.getSizeRow()),
+	m_board(other.getBoardData())
+{}
+
+gameBoard& gameBoard::operator=(const gameBoard& other)
+{
+	if (this != &other)
+	{
+		m_sizeRow = other.getSizeRow();
+		m_sizeCol = other.getSizeCol();
+		m_board = other.getBoardData();
+	}
+
+	return *this;
 }
 
 void gameBoard::loadLevelCubes(const vector<cube>& level)

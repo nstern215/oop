@@ -1,15 +1,15 @@
 #include "King.h"
 
+#include "controller.h"
+
 King::King():
 	m_col(0),
-	m_row(0),
-	m_isActive(true)
+	m_row(0)
 {}
 
-King::King(int col, int row, bool active):
+King::King(int col, int row):
 	m_col(col),
-	m_row(row),
-	m_isActive(active)
+	m_row(row)
 {
 }
 
@@ -23,18 +23,27 @@ int King::getCol() const
 	return m_col;
 }
 
-void King::changeActive()
+bool King::move(cube& destination, controller& gameController)
 {
-	m_isActive = !m_isActive;
-}
+	// if (gameController.moveToDestination(gameController.getCube(m_row, m_col), destination))
+	if (destination.getActiveElement() == 'X')
+	{
+		if (gameController.useTeleport(destination, m_row, m_col))
+			return true;
 
-bool King::isActive() const
-{
-	return m_isActive;
-}
+		return false;
+	}
+	if (gameController.moveToDestination(m_row, m_col, destination))
+	{
+		m_row = destination.getRow();
+		m_col = destination.getCol();
 
-void King::move(cube& destination, controller& gameController)
-{
-	
+		if (destination.getContent() == '@')
+			gameController.win();
+
+		return true;
+	}
+
+	return false;
 }
 

@@ -6,17 +6,13 @@ class King
 {
 public:
 	King();
-	King(int col, int row, bool active = true);
-	void changeActive();
-
-	bool isActive() const;
-	void move(cube& destination, controller& gameController);
+	King(int col, int row);
+	bool move(cube& destination, controller& gameController);
 
 	int getRow() const;
 	int getCol() const;
 
 private:
-	bool m_isActive;
 	int m_row;
 	int m_col;
 };

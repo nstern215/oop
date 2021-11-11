@@ -5,4 +5,5 @@
 											"King.cpp"
 											"Mage.cpp"
 											"Thief.cpp"
-											"Warrior.cpp")
+											"Warrior.cpp"
+											"Teleport.cpp")

@@ -13,8 +13,9 @@ public:
 	cube(const cube& other);
 
 	cube& operator=(const cube& other);
+	bool operator==(const cube& other) const;
 	
-	bool setContent(char newContent);
+	void setContent(char newContent);
 	bool moveIn(cube& source);
 	char getActiveElement() const;
 	void removeActiveElement();

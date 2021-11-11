@@ -1,4 +1,4 @@
-#include "cube.h";
+#include "cube.h"
 
 cube::cube(int row, int col, char content, char overrideBy):
 	m_col(col),
@@ -6,7 +6,6 @@ cube::cube(int row, int col, char content, char overrideBy):
 	m_content(content),
 	m_override(overrideBy)
 {
-	setContent(content);
 }
 
 cube::cube(const cube& other):
@@ -30,52 +29,45 @@ cube& cube::operator=(const cube& other)
 	return  *this;
 }
 
+bool cube::operator==(const cube& other) const
+{
+	return m_col == other.getCol() && m_row == other.getRow();
+}
+
+
 bool cube::moveIn(cube& source)
 {
 	const char activeElement = getActiveElement();
 
 	switch (activeElement)
 	{
-	case ' ':
-		return true;
-	case '=':
-		return false;
-	case '#':
-		if (source.getActiveElement() == 'T' /*todo: and has key*/)
-			return true;
-		return false;
-	case '*':
-		if (source.getActiveElement() == 'M')
-			return true;
-		return false;
-	case 'X':
-		if (source.getActiveElement() != 'M')
-			return true; //todo: and send to the pair cube
-		return true;
 	case '@':
-		if (source.getActiveElement() == 'K')
-			return true; //todo: finish the game
-		return false;
-	case '!':
-		if (source.getActiveElement() == 'W')
-			return true; //todo: drop a key
-		return false;
-		default:
+		if (source.getActiveElement() != 'K')
 			return false;
+
+		m_override = source.getActiveElement();
+		source.removeActiveElement();
+		return true;
+
+	case ' ':
+	case 'F':
+	case 'X':
+		m_override = source.getActiveElement();
+		source.removeActiveElement();
+		return true;
+
+	default:
+		return false;
 	}
 }
 
-bool cube::setContent(char newContent)
+void cube::setContent(char newContent)
 {
 	m_content = newContent;
-	//m_content += newContent;
-	//todo: do we need this?
-	return true;
 }
 
 char cube::getActiveElement() const
 {
-	/*return m_content[0];*/
 	return m_override != 0 ? m_override : m_content;
 }
 

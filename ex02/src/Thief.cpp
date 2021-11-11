@@ -1,15 +1,14 @@
 #include "Thief.h"
+#include "controller.h"
 
 Thief::Thief():
 	m_col(1),
-	m_row(0),
-	m_isActive(false)
+	m_row(0)
 {}
 
-Thief::Thief(int col, int row, bool active) :
+Thief::Thief(int col, int row):
 	m_col(col),
-	m_row(row),
-	m_isActive(active)
+	m_row(row)
 {
 }
 
@@ -23,18 +22,30 @@ int Thief::getCol() const
 	return m_col;
 }
 
-void Thief::changeActive()
+bool Thief::move(cube& destination, controller& gameController)
 {
-	m_isActive = !m_isActive;
+	// if (gameController.moveToDestination(gameController.getCube(m_row, m_col), destination))
+	if (destination.getActiveElement() == 'X')
+	{
+		if (gameController.useTeleport(destination, m_row, m_col))
+			return true;
+
+		return false;
+	}
+	
+	if (destination.getActiveElement() == 'F')
+		gameController.collectKey(destination);
+
+	if (destination.getActiveElement() == '#' && gameController.isKeyExist())
+		gameController.openGate(destination);
+	
+	if (gameController.moveToDestination(m_row, m_col, destination))
+	{
+		m_row = destination.getRow();
+		m_col = destination.getCol();
+
+		return true;
+	}
+
+	return false;
 }
-
-bool Thief::isActive() const
-{
-	return m_isActive;
-}
-
-void Thief::move(cube& destination, controller& gameController)
-{
-
-}
-

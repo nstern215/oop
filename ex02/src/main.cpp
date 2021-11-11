@@ -2,25 +2,20 @@
 #include <iostream>
 
 #include "controller.h"
-#include "gameBoard.h"
-
+#include "Teleport.h"
 
 int main()
 {
-	gameBoard board(10, 10);
 
-	vector<cube> cubes;
+	vector<std::string> level = { "   ==M=!  X**",
+								  " K  =#=  T *@",
+								  "    X    ====",
+								  "W============" };
 
-	cubes.emplace_back(1, 1, '#');
-	cubes.emplace_back(3, 1, '*');
-	cubes.emplace_back(cube(4, 4, '*'));
-	cubes.emplace_back(cube(9, 9, '@'));
-	cubes.emplace_back(cube(5, 6, 'K'));
-	cubes.emplace_back(cube(4, 7, 'M'));
-
-	board.loadLevelCubes(cubes);
-
-	controller gameController(board);
+	vector<Teleport> teleports = { Teleport(0, 10, 2, 5) };
+	
+	controller gameController;
+	gameController.loadLevel(level, teleports);
 	gameController.play();
 
 	std::cin.get();
