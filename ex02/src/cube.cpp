@@ -34,7 +34,6 @@ bool cube::operator==(const cube& other) const
 	return m_col == other.getCol() && m_row == other.getRow();
 }
 
-
 bool cube::moveIn(cube& source)
 {
 	const char activeElement = getActiveElement();

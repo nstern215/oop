@@ -11,7 +11,7 @@ public:
 
 	Teleport& operator=(const Teleport& other);
 	
-	cube& getPair(const controller& gameController, const int sourceRow, const int sourceCol) const;
+	void getPair(const int sourceRow, const int sourceCol, int& pairRow, int& pairCol) const;
 
 	int getRow() const;
 	int getCol() const;

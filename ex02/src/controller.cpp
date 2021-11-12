@@ -343,15 +343,19 @@ void controller::win()
 	m_winLevel = true;
 }
 
-bool controller::useTeleport(cube& teleportCube, int sourceRow, int sourceCol)
+bool controller::useTeleport(cube& teleportCube, int sourceRow, int sourceCol, int& newRow, int& newCol)
 {
-	cube destination;
+	int pairRow;
+	int pairCol;
 	
 	for (const auto& t : m_teleports)
 	{
-		destination = t.getPair(*this, teleportCube.getRow(), teleportCube.getCol());
-		if (teleportCube == destination)
+		t.getPair(teleportCube.getRow(), teleportCube.getCol(), pairRow, pairCol);
+		cube& destination = m_board.getCube(pairRow, pairCol);
+		if (teleportCube != destination)
 		{
+			newRow = destination.getRow();
+			newCol = destination.getCol();
 			return moveToDestination(sourceRow, sourceCol, destination);
 		}
 	}

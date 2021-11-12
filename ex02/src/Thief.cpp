@@ -27,8 +27,16 @@ bool Thief::move(cube& destination, controller& gameController)
 	// if (gameController.moveToDestination(gameController.getCube(m_row, m_col), destination))
 	if (destination.getActiveElement() == 'X')
 	{
-		if (gameController.useTeleport(destination, m_row, m_col))
+		int newRow;
+		int newCol;
+
+		if (gameController.useTeleport(destination, m_row, m_col, newRow, newCol))
+		{
+			m_row = newRow;
+			m_col = newCol;
+
 			return true;
+		}
 
 		return false;
 	}

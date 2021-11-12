@@ -40,7 +40,7 @@ public:
 	void win();
 	void killFire(cube& fireCube);
 	bool openGate(cube& gateCube);
-	bool useTeleport(cube& teleportCube, int sourceRow, int sourceCol);
+	bool useTeleport(cube& teleportCube, int sourceRow, int sourceCol, int& newRow, int& newCol);
 	bool moveToDestination(int sourceRow, int sourceCol, cube& destination);
 	cube& getCube(int row, int col);
 

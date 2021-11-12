@@ -29,15 +29,23 @@ Teleport& Teleport::operator=(const Teleport& other)
 	return *this;
 }
 
-cube& Teleport::getPair(const controller& gameController, const int sourceRow, const int sourceCol) const
+void Teleport::getPair(const int sourceRow, const int sourceCol, int& pairRow, int& pairCol) const
 {
 	if (m_row == sourceRow && m_col == sourceCol)
-		return gameController.getBoard().getCube(m_row, m_col);
-
-	if (m_pairRow == sourceRow && m_pairCol == sourceCol)
-		return gameController.getBoard().getCube(m_pairRow, m_pairCol);
-
-	return gameController.getBoard().getCube(sourceRow, sourceCol);
+	{
+		pairRow = m_pairRow;
+		pairCol = m_pairCol;
+	}
+	else if (m_pairRow == sourceRow && m_pairCol == sourceCol)
+	{
+		pairRow = m_row;
+		pairCol = m_col;
+	}
+	else
+	{
+		pairRow = sourceRow;
+		pairCol = sourceCol;
+	}
 }
 
 int Teleport::getRow() const
